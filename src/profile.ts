@@ -62,7 +62,7 @@ export const profile = {
 
   /**
    * Your GitHub repo URL. The course platform reads this from /api/health to
-   * verify you have ≥ 5 commits spread over days (not one bulk dump).
+   * verify you have ≥ 5 commits spread over days (not one bulk dump)
    * Example: "https://github.com/your-username/your-repo"
    */
   repoUrl: "https://github.com/Mayeni97/my-site",
