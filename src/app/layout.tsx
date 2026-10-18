@@ -30,12 +30,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={fontVariables} style={themeVars}>
       <body className="flex min-h-screen flex-col">
-        <header className="border-b border-line bg-surface">
-          <div className="mx-auto flex max-w-3xl items-baseline justify-between px-6 py-5">
-            <Link href="/" className="font-heading text-lg font-bold tracking-tight">
-              {profile.displayName}
+        <header className="border-b border-line bg-surface/90 backdrop-blur">
+          <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-5">
+            <Link href="/" className="font-heading text-lg font-bold tracking-tight hover:text-accent">
+              {profile.displayName}<span className="ml-1 text-accent">.</span>
             </Link>
-            <nav className="flex gap-5 text-sm font-medium text-muted">
+            <nav className="flex items-center gap-5 text-sm font-medium text-muted">
               <Link href="/" className="transition hover:text-accent">
                 Home
               </Link>
@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </header>
         <div className="flex-1">{children}</div>
         <footer className="border-t border-line">
-          <div className="mx-auto max-w-3xl px-6 py-6 text-sm text-muted">
+          <div className="mx-auto max-w-4xl px-6 py-8 text-sm text-muted">
             <p>
               {profile.displayName} · a portfolio of decision services ·{" "}
               <span className="text-accent">Good Decisions at Any Scale</span>

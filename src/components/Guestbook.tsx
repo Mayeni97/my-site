@@ -60,7 +60,7 @@ export function Guestbook() {
 
   return (
     <div className="mt-6">
-      <form onSubmit={sign} className="rounded-xl border border-line bg-surface p-5">
+      <form onSubmit={sign} className="rounded-2xl border border-line bg-surface p-6 shadow-sm">
         <div className="flex flex-col gap-3 sm:flex-row">
           <input
             required
@@ -79,7 +79,7 @@ export function Guestbook() {
           <button
             type="submit"
             disabled={busy}
-            className="rounded-lg bg-accent px-5 py-2 text-sm font-semibold text-accent-ink transition hover:opacity-90 disabled:opacity-50"
+            className="rounded-lg bg-accent px-5 py-2 text-sm font-semibold text-accent-ink transition hover:-translate-y-0.5 hover:opacity-90 disabled:opacity-50"
           >
             {busy ? "Signing…" : "Sign"}
           </button>

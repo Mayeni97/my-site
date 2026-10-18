@@ -9,13 +9,14 @@ export const metadata = { title: `About — ${profile.displayName}` };
  */
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-3xl px-6 py-14">
-      <div className="flex flex-col gap-10 sm:flex-row">
+    <main className="mx-auto max-w-4xl px-6 py-14 sm:py-20">
+      <div className="rounded-2xl border border-line bg-surface p-6 sm:p-10">
+        <div className="flex flex-col gap-10 sm:flex-row sm:items-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={profile.photoPath}
           alt={profile.displayName}
-          className="h-56 w-56 shrink-0 rounded-2xl border border-line object-cover"
+          className="h-56 w-56 shrink-0 rounded-2xl border border-line object-cover shadow-lg shadow-accent/10"
         />
         <div>
           <h1 className="text-4xl font-bold">{profile.displayName}</h1>
@@ -23,6 +24,7 @@ export default function AboutPage() {
             From <span className="font-semibold text-ink">{profile.hometown}</span>
           </p>
           <p className="mt-5 max-w-prose">{profile.bio}</p>
+        </div>
         </div>
       </div>
 
