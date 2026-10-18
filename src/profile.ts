@@ -42,7 +42,7 @@ export const profile = {
    * (e.g. put photo.jpg in the public/ folder and change this to "/photo.jpg").
    * It must be a real image file: the grader fetches it and checks.
    */
-  photoPath: "/image.jpeg",
+  photoPath: "/mayowa.jpeg",
 
   /**
    * Who can see your roster card:
