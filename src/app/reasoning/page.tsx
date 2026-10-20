@@ -47,8 +47,8 @@ export default async function ReasoningPage() {
       <h1 className="mt-3 text-4xl font-bold">My Reasoning &amp; Uncertainty Service</h1>
       {/* TODO(yours): one sentence, your words, on what this service does. */}
       <p className="mt-4 max-w-prose text-muted">
-        Below is the most recent problem my API solved, for each of the three problem types it
-        speaks. Every number on this page comes from the same live data my API answered with.
+      I built this reasoning service to help evaluate logical arguments, calculate probabilities, and understand expected
+      outcomes. It uses real-time results from my API to show how each answer is calculated.
       </p>
 
       {/* ── Latest syllogism audit ─────────────────────────────────────── */}
@@ -75,11 +75,8 @@ export default async function ReasoningPage() {
             </p>
             {/* TODO(yours): rewrite this explanation so it sounds like you (Station 2.1). */}
             <p className="mt-2 max-w-prose text-sm text-muted">
-              How the service decided: it ignores the story and reads only the shape of
-              the argument. The rule promises that the if-part brings the then-part, so
-              only two observations prove anything: the if-part being true, or the
-              then-part being false. Every other shape proves nothing, no matter how
-              believable the story feels.
+            The service checks whether the conclusion logically follows from the information given. It focuses on the structure of
+            the argument rather than whether the situation sounds believable. It also identifies common reasoning mistakes.
             </p>
           </div>
         ) : (
@@ -111,7 +108,12 @@ export default async function ReasoningPage() {
                 posterior means for the flagged case (Station 2.3). */}
           </div>
         ) : (
-          <p className="mt-3 text-muted">No plausibility probe yet.</p>
+          <p className="mt-3 text-muted">
+          This updated probability shows how likely a flagged case
+          is to have the condition after considering the original
+          likelihood and the system's accuracy. It helps managers
+          make better decisions using evidence instead of assumptions.
+        </p>
         )}
       </section>
 
@@ -143,7 +145,13 @@ export default async function ReasoningPage() {
                 does not promise (Station 2.4). */}
           </div>
         ) : (
-          <p className="mt-3 text-muted">No Bernoulli probe yet.</p>
+          <p className="mt-3 text-muted">
+          The expected payoff represents the average outcome we
+          would anticipate over many similar situations. It helps
+          evaluate decisions involving uncertainty, but it does
+          not guarantee that any individual outcome will match
+          that average.
+          </p>
         )}
       </section>
     </main>
