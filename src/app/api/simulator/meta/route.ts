@@ -1,4 +1,4 @@
-import { notBuiltYet } from "@/lib/not-built-yet";
+import { NextResponse } from "next/server";
 
 /**
  * ── TODO: Lane 3 — Challenge 3, "Decision Simulator" ─────────────────────
@@ -8,6 +8,14 @@ import { notBuiltYet } from "@/lib/not-built-yet";
  * complete file to paste over this one.
  * Until then it returns 501 so probes honestly fail.
  */
+
+// Challenge 3 Step 1: Simulator metadata is now activated.
+// The service identifies itself and returns the course token.
+
 export async function GET() {
-  return notBuiltYet(3, "Decision Simulator");
+  return NextResponse.json({
+    service: "simulator",
+    specVersion: "1",
+    studentToken: process.env.SITE_TOKEN,
+  });
 }
