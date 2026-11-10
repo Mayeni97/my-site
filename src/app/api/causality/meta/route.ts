@@ -1,12 +1,16 @@
-import { notBuiltYet } from "@/lib/not-built-yet";
+
+import { NextResponse } from "next/server";
 
 /**
- * ── TODO: Lane 4 — Challenge 4, "Causality Audit Service" ────────────────
- * You'll build this after Chapters 15–19. This route proves the service is
- * yours by echoing your token; see the challenge page for the wire contract
- * (the exact JSON to send and receive).
- * Until then it returns 501 so probes honestly fail.
+ * Lane 4 — Challenge 4: Causality Audit Service
+ *
+ * This API endpoint identifies our service
+ * and returns our course token to the grader.
  */
 export async function GET() {
-  return notBuiltYet(4, "Causality Audit Service");
+  return NextResponse.json({
+    service: "causality",
+    specVersion: "1",
+    studentToken: process.env.SITE_TOKEN,
+  });
 }
