@@ -1,0 +1,279 @@
+{
+  "probeId": "yours",
+  "type": "capstone-decision",
+  "domain": "channels",
+  "yours": true,
+  "scenario": {
+    "narrative": "A marketing team has $490 a week of extra budget for next quarter (13 weeks). It can give the extra money to one channel: events or search. The history shows past weeks for each channel at its usual low spend and at the higher spend the extra money buys, with that week's revenue. The team wants the extra spending to pay for itself over the quarter. They can accept a losing quarter 1 time in 10, but not more often. Which channel should get the money?",
+    "params": {
+      "reader": "the marketing team",
+      "unit": "dollars of net gain",
+      "extraBudget": 490,
+      "periodName": "quarter",
+      "periodLength": 13,
+      "periodUnit": "weeks",
+      "runs": 10000
+    },
+    "decisionRule": "Run the recipe 10,000 times; each run is one possible quarter. In each run, draw every node once, in order, and work out both options' results. For each option report the typical result (the middle of the runs), the likely range (from the 5% point to the 95% point of the runs), and the chance of falling short (the share of runs below 0 dollars of net gain). Recommend the option with the higher typical result among the options whose chance of falling short is at most 0.1. Also report how often the recommended option's result is higher than the other's in the same run."
+  },
+  "history": [
+    {
+      "channel": "search",
+      "spend": "high",
+      "revenue": 5370
+    },
+    {
+      "channel": "search",
+      "spend": "high",
+      "revenue": 6320
+    },
+    {
+      "channel": "search",
+      "spend": "low",
+      "revenue": 5200
+    },
+    {
+      "channel": "search",
+      "spend": "low",
+      "revenue": 4990
+    },
+    {
+      "channel": "search",
+      "spend": "high",
+      "revenue": 6640
+    },
+    {
+      "channel": "events",
+      "spend": "low",
+      "revenue": 9120
+    },
+    {
+      "channel": "search",
+      "spend": "high",
+      "revenue": 5520
+    },
+    {
+      "channel": "search",
+      "spend": "high",
+      "revenue": 6140
+    },
+    {
+      "channel": "search",
+      "spend": "low",
+      "revenue": 5080
+    },
+    {
+      "channel": "search",
+      "spend": "high",
+      "revenue": 5280
+    },
+    {
+      "channel": "events",
+      "spend": "low",
+      "revenue": 6890
+    },
+    {
+      "channel": "events",
+      "spend": "high",
+      "revenue": 8590
+    },
+    {
+      "channel": "search",
+      "spend": "low",
+      "revenue": 5170
+    },
+    {
+      "channel": "events",
+      "spend": "high",
+      "revenue": 9510
+    },
+    {
+      "channel": "events",
+      "spend": "low",
+      "revenue": 8170
+    },
+    {
+      "channel": "search",
+      "spend": "low",
+      "revenue": 5130
+    },
+    {
+      "channel": "events",
+      "spend": "low",
+      "revenue": 7950
+    },
+    {
+      "channel": "events",
+      "spend": "low",
+      "revenue": 9100
+    },
+    {
+      "channel": "search",
+      "spend": "high",
+      "revenue": 6530
+    },
+    {
+      "channel": "events",
+      "spend": "high",
+      "revenue": 9660
+    },
+    {
+      "channel": "search",
+      "spend": "low",
+      "revenue": 4550
+    },
+    {
+      "channel": "events",
+      "spend": "low",
+      "revenue": 9560
+    },
+    {
+      "channel": "search",
+      "spend": "high",
+      "revenue": 6100
+    },
+    {
+      "channel": "search",
+      "spend": "low",
+      "revenue": 4850
+    },
+    {
+      "channel": "search",
+      "spend": "high",
+      "revenue": 5550
+    },
+    {
+      "channel": "search",
+      "spend": "high",
+      "revenue": 6100
+    },
+    {
+      "channel": "events",
+      "spend": "low",
+      "revenue": 7520
+    },
+    {
+      "channel": "search",
+      "spend": "high",
+      "revenue": 6480
+    },
+    {
+      "channel": "events",
+      "spend": "low",
+      "revenue": 8390
+    },
+    {
+      "channel": "search",
+      "spend": "low",
+      "revenue": 5360
+    },
+    {
+      "channel": "events",
+      "spend": "low",
+      "revenue": 7950
+    },
+    {
+      "channel": "search",
+      "spend": "low",
+      "revenue": 5560
+    },
+    {
+      "channel": "search",
+      "spend": "low",
+      "revenue": 5290
+    }
+  ],
+  "candidates": [
+    {
+      "id": "channel-events",
+      "label": "events"
+    },
+    {
+      "id": "channel-search",
+      "label": "search"
+    }
+  ],
+  "limit": {
+    "atLeast": 0,
+    "maxChance": 0.1,
+    "plain": "The extra spending must pay for itself over the quarter. The team can accept a losing quarter 1 time in 10."
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "avg-extra-events",
+        "plain": "How much more revenue events brings in a week at high spend than at low spend, on average. Based on 3 high-spend weeks and 9 low-spend weeks; more weeks would narrow it.",
+        "repeat": "once",
+        "draw": {
+          "type": "normal",
+          "mean": 958.9,
+          "sd": 438.14
+        },
+        "basedOn": 3
+      },
+      {
+        "id": "extra-events",
+        "plain": "Extra revenue from events in one week at high spend. Each week varies around the average.",
+        "repeat": "weekly",
+        "draw": {
+          "type": "normal",
+          "mean": "avg-extra-events",
+          "sd": 579.3
+        }
+      },
+      {
+        "id": "net-gain-events",
+        "plain": "Extra revenue from events over the quarter, minus the extra spending.",
+        "repeat": "result",
+        "option": "channel-events",
+        "compute": "sum over the 13 weeks of extra-events − 13 × 490"
+      },
+      {
+        "id": "avg-extra-search",
+        "plain": "How much more revenue search brings in a week at high spend than at low spend, on average. Based on 11 high-spend weeks and 10 low-spend weeks; more weeks would narrow it.",
+        "repeat": "once",
+        "draw": {
+          "type": "normal",
+          "mean": 884.7,
+          "sd": 172.5
+        },
+        "basedOn": 11
+      },
+      {
+        "id": "extra-search",
+        "plain": "Extra revenue from search in one week at high spend. Each week varies around the average.",
+        "repeat": "weekly",
+        "draw": {
+          "type": "normal",
+          "mean": "avg-extra-search",
+          "sd": 491
+        }
+      },
+      {
+        "id": "net-gain-search",
+        "plain": "Extra revenue from search over the quarter, minus the extra spending.",
+        "repeat": "result",
+        "option": "channel-search",
+        "compute": "sum over the 13 weeks of extra-search − 13 × 490"
+      }
+    ],
+    "edges": [
+      [
+        "avg-extra-events",
+        "extra-events"
+      ],
+      [
+        "extra-events",
+        "net-gain-events"
+      ],
+      [
+        "avg-extra-search",
+        "extra-search"
+      ],
+      [
+        "extra-search",
+        "net-gain-search"
+      ]
+    ]
+  }
+}
